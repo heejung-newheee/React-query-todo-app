@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../Modal';
 import { StButton, StRoundBtnSvg } from '../Button';
 import { styled } from 'styled-components';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import uuid from 'react-uuid';
 import { addTodo } from '../../api/todos';
+import shortid from 'shortid';
+import useInput from 'hooks/useInput';
 
 function InputForm({ closeAddModal }) {
-    const [title, setTitle] = useState('');
-    const [contents, setContents] = useState('');
+    const [title, onChangeTitleHandler] = useInput('');
+    const [contents, onChangeContentsHandler] = useInput('');
 
+    // const onChangeTitleHandler = (e) => {
+    //     setTitle(e.target.value);
+    // };
+    // const onChangeContentsHandler = (e) => {
+    //     setContents(e.target.value);
+    // };
     const queryClient = useQueryClient();
     const mutation = useMutation(addTodo, {
         onSuccess: () => {
@@ -22,7 +29,7 @@ function InputForm({ closeAddModal }) {
             title,
             contents,
             isDone: false,
-            id: uuid()
+            id: shortid.generate()
         };
         mutation.mutate(newTodo);
         closeAddModal();
@@ -37,23 +44,9 @@ function InputForm({ closeAddModal }) {
             </StCloseBtn>
             <form onSubmit={addTodoHandler}>
                 <StLabel htmlFor="title">제목</StLabel>
-                <StInputForm
-                    name="title"
-                    type="text"
-                    value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                    }}
-                />
+                <StInputForm name="title" type="text" value={title} onChange={onChangeTitleHandler} />
                 <StLabel htmlFor="contents">내용</StLabel>
-                <StTextArea
-                    name="contents"
-                    type="text"
-                    value={contents}
-                    onChange={(e) => {
-                        setContents(e.target.value);
-                    }}
-                />
+                <StTextArea name="contents" type="text" value={contents} onChange={onChangeContentsHandler} />
                 <StButton type="submit" btnSize="large" bgColor={'#b1c6fd'}>
                     등록
                 </StButton>
