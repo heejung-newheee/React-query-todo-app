@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Layout from '../components/common/Layout';
+import Header from '../components/common/Header';
+import Footer from '../components/common/Footer';
 import { StBg } from '../components/Background';
 import { styled } from 'styled-components';
 import TodoList from '../components/Todo/TodoList';
@@ -10,10 +10,7 @@ import { StRoundBtnSvg } from '../components/Button';
 
 function Main() {
     const [isOpen, setIsOpen] = useState(false);
-    const openAddModal = () => {
-        setIsOpen(true);
-    };
-    const closeAddModal = () => {
+    const toggleModal = () => {
         setIsOpen((isOpen) => !isOpen);
     };
     return (
@@ -22,10 +19,10 @@ function Main() {
                 <Header />
                 <Layout>
                     {/* add 버튼 */}
-                    <StAddBtn onClick={openAddModal}>
+                    <StAddBtn onClick={toggleModal}>
                         <span>Add Todo</span>
-                        <StRoundBtnSvg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-                            <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                        <StRoundBtnSvg>
+                            <img src="/plusIcon.svg" alt="" />
                         </StRoundBtnSvg>
                     </StAddBtn>
                     {/* list 영역 */}
@@ -33,7 +30,7 @@ function Main() {
                     <TodoList isDone={false} />
                 </Layout>
                 <Footer />
-                {isOpen && <InputForm closeAddModal={closeAddModal} />}
+                {isOpen && <InputForm toggleModal={toggleModal} />}
             </StBg>
         </>
     );

@@ -1,0 +1,19 @@
+
+<svg version="1.1" id="레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 15.1 12" style="enable-background:new 0 0 15.1 12;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="2.8128" y1="10.6819" x2="13.699" y2="2.6982" gradientTransform="matrix(1 0 0 -1 0 14)">
+	<stop  offset="0" style="stop-color:#94AAFF"/>
+	<stop  offset="0.1263" style="stop-color:#8DADFE"/>
+	<stop  offset="0.3159" style="stop-color:#78B5FB"/>
+	<stop  offset="0.5453" style="stop-color:#56C3F6"/>
+	<stop  offset="0.8034" style="stop-color:#28D6EF"/>
+	<stop  offset="1" style="stop-color:#00E6E9"/>
+</linearGradient>
+<path class="st0" d="M3.1,1.9c0-0.6,0.5-1.1,1.1-1.1H11c0.6,0,1.1,0.5,1.1,1.1V9h-9V1.9z M10.4,3c-0.2-0.2-0.6-0.2-0.8,0L7,5.6
+	L5.9,4.5c-0.2-0.2-0.6-0.2-0.8,0c-0.2,0.2-0.2,0.6,0,0.8l1.5,1.5C6.8,7,7.2,7,7.4,6.8l3-3C10.7,3.6,10.7,3.2,10.4,3L10.4,3z
+	 M0.8,7.9c0-0.6,0.5-1.1,1.1-1.1h0.4v3h10.5v-3h0.4c0.6,0,1.1,0.5,1.1,1.1v2.2c0,0.6-0.5,1.1-1.1,1.1H2c-0.6,0-1.2-0.5-1.2-1.1
+	L0.8,7.9L0.8,7.9z"/>
+</svg>

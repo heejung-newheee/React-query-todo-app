@@ -7,16 +7,10 @@ import { addTodo } from '../../api/todos';
 import shortid from 'shortid';
 import useInput from 'hooks/useInput';
 
-function InputForm({ closeAddModal }) {
+function InputForm({ toggleModal }) {
     const [title, onChangeTitleHandler] = useInput('');
     const [contents, onChangeContentsHandler] = useInput('');
 
-    // const onChangeTitleHandler = (e) => {
-    //     setTitle(e.target.value);
-    // };
-    // const onChangeContentsHandler = (e) => {
-    //     setContents(e.target.value);
-    // };
     const queryClient = useQueryClient();
     const mutation = useMutation(addTodo, {
         onSuccess: () => {
@@ -25,29 +19,49 @@ function InputForm({ closeAddModal }) {
     });
     const addTodoHandler = (e) => {
         e.preventDefault();
-        const newTodo = {
-            title,
-            contents,
-            isDone: false,
-            id: shortid.generate()
-        };
-        mutation.mutate(newTodo);
-        closeAddModal();
+        if (title.length < 5) {
+            alert('5글자 이상 적어주세요');
+        } else if (contents.length < 5) {
+            alert('5글자 이상 적어주세요');
+        } else {
+            const newTodo = {
+                title,
+                contents,
+                isDone: false,
+                id: shortid.generate()
+            };
+            mutation.mutate(newTodo);
+            toggleModal();
+        }
     };
     return (
         <Modal>
             <StCloseBtn>
                 <StModalName>추가하기</StModalName>
-                <StRoundBtnSvg onClick={closeAddModal} xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
-                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                <StRoundBtnSvg onClick={toggleModal}>
+                    <img src="/closeIcon.svg" alt="" />
                 </StRoundBtnSvg>
             </StCloseBtn>
             <form onSubmit={addTodoHandler}>
                 <StLabel htmlFor="title">제목</StLabel>
                 <StInputForm name="title" type="text" value={title} onChange={onChangeTitleHandler} />
+                {title.length < 5 ? (
+                    <StPtag>5자 이상 입력해주세요</StPtag>
+                ) : (
+                    <StPtag>
+                        <br />
+                    </StPtag>
+                )}
                 <StLabel htmlFor="contents">내용</StLabel>
                 <StTextArea name="contents" type="text" value={contents} onChange={onChangeContentsHandler} />
-                <StButton type="submit" btnSize="large" bgColor={'#b1c6fd'}>
+                {contents.length < 5 ? (
+                    <StPtag>5자 이상 입력해주세요</StPtag>
+                ) : (
+                    <StPtag>
+                        <br />
+                    </StPtag>
+                )}
+                <StButton disabled={title.length >= 5 && contents.length >= 5 ? false : true} type="submit" btnSize="large" fontColor={'black'}>
                     등록
                 </StButton>
             </form>
@@ -89,9 +103,16 @@ const StTextArea = styled.textarea`
     padding: 10px;
     border: solid 3px #b1c6fd;
     border-radius: 10px;
-    margin: 8px 0 30px;
+    margin: 8px 0 12px;
     &:focus {
         border: solid 3px #8eabf7;
         box-shadow: rgba(18, 14, 250, 0.1) 2px 4px 10px;
     }
 `;
+const StPtag = styled.p`
+    color: #b1c6fd;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+`;
+
+export { StCloseBtn, StModalName, StLabel, StInputForm, StTextArea, StPtag };

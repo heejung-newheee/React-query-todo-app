@@ -14,14 +14,17 @@ const addTodo = async (newTodo) => {
 const switchTodo = async (id) => {
     const todoData = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`);
     const thisData = todoData.data;
-    console.log(thisData);
-    const updateData = {
+    const switchData = {
         ...thisData,
         isDone: !thisData.isDone
     };
-    console.log(updateData);
 
-    axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, updateData);
+    axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, switchData);
+};
+
+// 내용수정
+const updateTodo = async (id, updateData) => {
+    await axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, updateData);
 };
 
 // 삭제
@@ -29,4 +32,4 @@ const deleteTodo = async (id) => {
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`);
 };
 
-export { getTodos, addTodo, deleteTodo, switchTodo };
+export { getTodos, addTodo, deleteTodo, switchTodo, updateTodo };

@@ -77,6 +77,7 @@ const StButton = styled.button`
     &:disabled {
         background-color: #ddd;
         border: 0;
+        color: #555;
         cursor: default;
         &:hover::before {
             width: 0%;
@@ -85,10 +86,8 @@ const StButton = styled.button`
     }
 `;
 
-const StRoundBtnSvg = styled.svg`
+const StRoundBtnSvg = styled.div`
     cursor: pointer;
-    fill: #fff;
-    font-size: 1.2rem;
     padding: 7px;
     width: 40px;
     height: 40px;
@@ -96,10 +95,17 @@ const StRoundBtnSvg = styled.svg`
     border-radius: 50%;
     box-shadow: rgba(18, 14, 250, 0.1) 2px 4px 10px;
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* :hover {
         background-color: #8babfc;
         transform: rotateY(180deg);
     } */
+    img {
+        filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(82deg) brightness(105%) contrast(101%);
+        width: 22px;
+    }
 `;
 
 export { StButtonWrap, StButton, StRoundBtnSvg };
