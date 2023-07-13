@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Modal from '../Modal';
 import { StButton, StRoundBtnSvg } from '../Button';
 import { styled } from 'styled-components';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { addTodo } from '../../api/todos';
 import shortid from 'shortid';
 import useInput from 'hooks/useInput';
+import moment from 'moment/moment';
 
 function InputForm({ toggleModal }) {
     const [title, onChangeTitleHandler] = useInput('');
     const [contents, onChangeContentsHandler] = useInput('');
+    const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     const queryClient = useQueryClient();
     const mutation = useMutation(addTodo, {
@@ -28,7 +30,8 @@ function InputForm({ toggleModal }) {
                 title,
                 contents,
                 isDone: false,
-                id: shortid.generate()
+                id: shortid.generate(),
+                date: nowTime
             };
             mutation.mutate(newTodo);
             toggleModal();
@@ -61,7 +64,7 @@ function InputForm({ toggleModal }) {
                         <br />
                     </StPtag>
                 )}
-                <StButton disabled={title.length >= 5 && contents.length >= 5 ? false : true} type="submit" btnSize="large" fontColor={'black'}>
+                <StButton disabled={title.length >= 5 && contents.length >= 5 ? false : true} type="submit" $btnSize="large" $fontColor={'black'}>
                     등록
                 </StButton>
             </form>

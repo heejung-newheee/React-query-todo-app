@@ -12,21 +12,22 @@ function Todo({ todo }) {
 
     //리액트 쿼리 관련 코드
     const queryClient = useQueryClient();
-    const mutateUp = useMutation(switchTodo, {
+    const mutationSwitch = useMutation(switchTodo, {
         onSuccess: () => {
             queryClient.invalidateQueries('todos');
         }
     });
-    const mutateDel = useMutation(deleteTodo, {
+    const mutationDel = useMutation(deleteTodo, {
         onSuccess: () => {
             queryClient.invalidateQueries('todos');
         }
     });
     const switchTodoHandler = (id) => {
-        mutateUp.mutate(todo.id);
+        console.log('스위치');
+        mutationSwitch.mutate(todo.id);
     };
     const deleteTodoHandler = (id) => {
-        if (window.confirm(CONFIRM_MESSAGE)) mutateDel.mutate(todo.id);
+        if (window.confirm(CONFIRM_MESSAGE)) mutationDel.mutate(todo.id);
     };
     return (
         <>
@@ -38,7 +39,7 @@ function Todo({ todo }) {
                 <StContentArea
                     onClick={() => {
                         navigate(`/detail/:${todo.id}`, {
-                            state: { id: todo.id, title: todo.title, contents: todo.contents, isDone: todo.isDone }
+                            state: { id: todo.id, title: todo.title, contents: todo.contents, isDone: todo.isDone, date: todo.date }
                         });
                     }}>
                     <StTodoTitleH5 className={todo.isDone === false ? '' : 'checked'}>{todo.title}</StTodoTitleH5>

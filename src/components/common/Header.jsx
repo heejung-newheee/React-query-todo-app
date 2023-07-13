@@ -25,7 +25,7 @@ const StHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
 `;
 const StTitleH1 = styled.h1`
     cursor: pointer;

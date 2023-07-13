@@ -37,7 +37,6 @@ const Footer = () => {
 export default Footer;
 
 const FooterContainer = styled.div`
-    width: 100vw;
     color: white;
     padding: 20px 0 50px;
     display: flex;

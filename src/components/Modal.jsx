@@ -19,7 +19,7 @@ const StModalBg = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(225, 225, 225, 0.733);
+    background-color: ${(props) => props.bgMdColor || 'rgba(225, 225, 225, 0.733)'};
     z-index: 888;
 `;
 const StModalBox = styled.div`

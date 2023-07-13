@@ -23,8 +23,8 @@ const switchTodo = async (id) => {
 };
 
 // 내용수정
-const updateTodo = async (id, updateData) => {
-    await axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, updateData);
+const updateTodo = async (updateData) => {
+    await axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${updateData.id}`, updateData);
 };
 
 // 삭제

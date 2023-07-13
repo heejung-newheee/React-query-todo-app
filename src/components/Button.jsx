@@ -9,7 +9,7 @@ export default Button;
 
 const StButtonWrap = styled.div`
     display: flex;
-    gap: 10px;
+    justify-content: flex-end;
     margin-bottom: 10px;
 `;
 const StButton = styled.button`
@@ -18,14 +18,15 @@ const StButton = styled.button`
     align-items: center;
     background-color: ${(props) => props.bgColor || 'transparent'};
     border: ${(props) => props.stBorder || 'solid 3px #8babfc'};
-    color: ${(props) => props.fontColor || '#fff'};
+    color: ${(props) => props.$fontColor || '#fff'};
     border-radius: 8px;
     padding: 1px 0;
+    margin-top: 20px;
 
-    ${({ btnSize }) => {
+    ${({ $btnSize }) => {
         let btnHeight;
         let btnWidth;
-        switch (btnSize) {
+        switch ($btnSize) {
             case 'large':
                 btnWidth = '100%';
                 btnHeight = '50px';
