@@ -11,15 +11,8 @@ const addTodo = async (newTodo) => {
 };
 
 // 상태변경
-const switchTodo = async (id) => {
-    const todoData = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`);
-    const thisData = todoData.data;
-    const switchData = {
-        ...thisData,
-        isDone: !thisData.isDone
-    };
-
-    axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`, switchData);
+const switchTodo = async (switchData) => {
+    axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${switchData.id}`, switchData);
 };
 
 // 내용수정

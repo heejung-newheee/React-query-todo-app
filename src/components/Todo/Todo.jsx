@@ -5,11 +5,6 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 function Todo({ todo }) {
-    const navigate = useNavigate();
-
-    // 삭제 확인 용 메시지 관리
-    const CONFIRM_MESSAGE = `[삭제 확인]\n\n"${todo.title}" 항목을 정말로 삭제하시겠습니까?\n삭제를 원치 않으시면 [취소] 버튼을 눌러주세요.`;
-
     //리액트 쿼리 관련 코드
     const queryClient = useQueryClient();
     const mutationSwitch = useMutation(switchTodo, {
@@ -22,13 +17,22 @@ function Todo({ todo }) {
             queryClient.invalidateQueries('todos');
         }
     });
-    const switchTodoHandler = (id) => {
-        console.log('스위치');
-        mutationSwitch.mutate(todo.id);
+
+    // 삭제 확인 용 메시지 관리
+    const CONFIRM_MESSAGE = `[삭제 확인]\n\n"${todo.title}" 항목을 정말로 삭제하시겠습니까?\n삭제를 원치 않으시면 [취소] 버튼을 눌러주세요.`;
+
+    const navigate = useNavigate();
+    const switchTodoHandler = () => {
+        const switchData = {
+            ...todo,
+            isDone: !todo.isDone
+        };
+        mutationSwitch.mutate(switchData);
     };
     const deleteTodoHandler = (id) => {
         if (window.confirm(CONFIRM_MESSAGE)) mutationDel.mutate(todo.id);
     };
+
     return (
         <>
             <StTodo>
@@ -46,7 +50,6 @@ function Todo({ todo }) {
                     <StTodoContents className={todo.isDone === false ? '' : 'checked'}>{todo.contents}</StTodoContents>
                 </StContentArea>
                 <StEditArea onClick={deleteTodoHandler}>
-                    {/* <StDelImg src="/src/assets/img/del.svg" alt="" /> */}
                     <StDelImg src="/del.svg" alt="" />
                 </StEditArea>
             </StTodo>

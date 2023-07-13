@@ -16,8 +16,8 @@ const StButton = styled.button`
     position: relative;
     cursor: pointer;
     align-items: center;
-    background-color: ${(props) => props.bgColor || 'transparent'};
-    border: ${(props) => props.stBorder || 'solid 3px #8babfc'};
+    background-color: ${(props) => props.$bgColor || 'transparent'};
+    border: ${(props) => props.$stBorder || 'solid 3px #8babfc'};
     color: ${(props) => props.$fontColor || '#fff'};
     border-radius: 8px;
     padding: 1px 0;
@@ -70,7 +70,7 @@ const StButton = styled.button`
         position: absolute;
     }
     &:active {
-        background-color: ${(props) => props.acColor || props.bgColor};
+        background-color: ${(props) => props.$acColor || props.$bgColor};
     }
     &:not(:last-of-type) {
         margin-right: 10px;
@@ -99,10 +99,7 @@ const StRoundBtnSvg = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* :hover {
-        background-color: #8babfc;
-        transform: rotateY(180deg);
-    } */
+
     img {
         filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(82deg) brightness(105%) contrast(101%);
         width: 22px;

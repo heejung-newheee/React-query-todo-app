@@ -9,7 +9,7 @@
     },
     {
       "title": "수정수정수정",
-      "contents": "수정 잘됩니다요",
+      "contents": "수정주서저어어엉",
       "isDone": false,
       "id": "7u63Jqe0V",
       "date": "2023-07-13 11:46:53"
@@ -22,18 +22,11 @@
       "date": "2023-07-13 11:46:53"
     },
     {
-      "title": "ggggggggggggg",
-      "contents": "gggggggggggggg",
-      "isDone": false,
+      "title": "수정수저엉",
+      "contents": "컴포넡트 분리 ",
+      "isDone": true,
       "id": "twp_TwvCt",
       "date": "2023-07-13 11:47:51"
-    },
-    {
-      "title": "할일입니다ㅎㅎㅎ",
-      "contents": "할일이있는데요ㅎㅎㅎㅎ",
-      "isDone": false,
-      "id": "z9KHaGqst",
-      "date": "2023-07-13 15:00:12"
     }
   ]
 }
