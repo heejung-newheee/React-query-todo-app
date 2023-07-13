@@ -9,6 +9,6 @@ export default Layout;
 
 const StContainer = styled.div`
     max-width: 1200px;
-    padding: 80px 10px;
+    padding: 40px 10px;
     margin: 0 auto;
 `;

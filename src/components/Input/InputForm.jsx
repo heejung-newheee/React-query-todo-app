@@ -21,9 +21,9 @@ function InputForm({ toggleModal }) {
     });
     const addTodoHandler = (e) => {
         e.preventDefault();
-        if (title.length < 5) {
-            alert('5글자 이상 적어주세요');
-        } else if (contents.length < 5) {
+        if (title.length < 2) {
+            alert('2글자 이상 적어주세요');
+        } else if (contents.length < 4) {
             alert('5글자 이상 적어주세요');
         } else {
             const newTodo = {
@@ -48,8 +48,8 @@ function InputForm({ toggleModal }) {
             <form onSubmit={addTodoHandler}>
                 <StLabel htmlFor="title">제목</StLabel>
                 <StInputForm name="title" type="text" value={title} onChange={onChangeTitleHandler} />
-                {title.length < 5 ? (
-                    <StPtag>5자 이상 입력해주세요</StPtag>
+                {title.length < 2 ? (
+                    <StPtag>2자 이상 입력해주세요</StPtag>
                 ) : (
                     <StPtag>
                         <br />
@@ -57,14 +57,14 @@ function InputForm({ toggleModal }) {
                 )}
                 <StLabel htmlFor="contents">내용</StLabel>
                 <StTextArea name="contents" type="text" value={contents} onChange={onChangeContentsHandler} />
-                {contents.length < 5 ? (
-                    <StPtag>5자 이상 입력해주세요</StPtag>
+                {contents.length < 4 ? (
+                    <StPtag>4자 이상 입력해주세요</StPtag>
                 ) : (
                     <StPtag>
                         <br />
                     </StPtag>
                 )}
-                <StButton disabled={title.length >= 5 && contents.length >= 5 ? false : true} type="submit" $btnSize="large" $fontColor={'black'}>
+                <StButton disabled={title.length >= 2 && contents.length >= 4 ? false : true} type="submit" $btnSize="large" $fontColor={'black'}>
                     등록
                 </StButton>
             </form>
