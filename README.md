@@ -20,34 +20,8 @@ React 개인 과제 Lv4 23.07.03 ~ 23.07.14
 
 | 기능   | URL         | Method | Request                                      | Response                                             |
 | ------ | ------------ | -------- | ------------------------------------------- | -------------------------------------------------- |
-| Todo 전체 조회 | /todos | `GET`   |     | {
-"todos": [
-{
-"title": “제목",
-"contents": "내용",
-"isDone": true,
-"id": "BAOqmr2io",
-"date": "2023-07-13 11:46:53"
-},
-{
-"title": "수정수정수정",
-"contents": "수정 잘됩니다요",
-"isDone": false,
-"id": "7u63Jqe0V",
-"date": "2023-07-13 11:46:53"
-}
-]
-} |
-| Todo 단일 조회 | /todos/id| `GET`   |   |{
-"todos": 
-{
-"title": “제목",
-"contents": "내용",
-"isDone": true,
-"id": "BAOqmr2io",
-"date": "2023-07-13 11:46:53"
-}
-}|
+| Todo 전체 조회 | /todos | `GET`   |     | {"todos": [{"title": “제목","contents": "내용","isDone": true,"id": id ,"date": date}]} |
+| Todo 단일 조회 | /todos/id| `GET`   |   |{"todos": [{"title": “제목","contents": "내용","isDone": true,"id": id ,"date": date}]}|
 | Todo 작성 | /todos | `POST`     |        |             |
 | Todo 수정 | /todos/id    | `PATCH`    |     |      |
 | Todo 삭제 | /todos/id    | `DELETE`    |   |     |
