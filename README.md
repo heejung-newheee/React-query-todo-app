@@ -22,6 +22,6 @@ React 개인 과제 Lv4 23.07.03 ~ 23.07.14
 | ------ | ------------ | -------- | ------------------------------------------- | -------------------------------------------------- |
 | Todo 전체 조회 | /todos | `GET`   |     | {"todos": [{"title": “제목","contents": "내용","isDone": true,"id": id ,"date": date}]} |
 | Todo 단일 조회 | /todos/id| `GET`   |   |{"todos": [{"title": “제목","contents": "내용","isDone": true,"id": id ,"date": date}]}|
-| Todo 작성 | /todos | `POST`     |        |             |
-| Todo 수정 | /todos/id    | `PATCH`    |     |      |
-| Todo 삭제 | /todos/id    | `DELETE`    |   |     |
+| Todo 작성 | /todos | `POST`     | {title,contents,isDone,id,date} |             |
+| Todo 수정 | /todos/id    | `PATCH`    |   {title,contents,isDone,id}    |      |
+| Todo 삭제 | /todos/id    | `DELETE`   | {id}     |      |
