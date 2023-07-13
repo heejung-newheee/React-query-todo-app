@@ -1,17 +1,28 @@
 import axios from 'axios';
-import { useEffect } from 'react';
 
 //조회
 const getTodos = async () => {
-    const response = await axios.get(`http://localhost:4000/todos`);
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos`);
     return response.data;
 };
 // 등록
 const addTodo = async (newTodo) => {
-    axios.post(`http://localhost:4000/todos`, newTodo);
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/todos`, newTodo);
 };
-// useEffect(() => {
-//     console.log(response.data);
-// }, []);
 
-export { getTodos, addTodo };
+// 상태변경
+const switchTodo = async (switchData) => {
+    axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${switchData.id}`, switchData);
+};
+
+// 내용수정
+const updateTodo = async (updateData) => {
+    await axios.patch(`${process.env.REACT_APP_SERVER_URL}/todos/${updateData.id}`, updateData);
+};
+
+// 삭제
+const deleteTodo = async (id) => {
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/todos/${id}`);
+};
+
+export { getTodos, addTodo, deleteTodo, switchTodo, updateTodo };
