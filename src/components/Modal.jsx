@@ -1,11 +1,13 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { styled } from 'styled-components';
 
 function Modal({ children }) {
-    return (
+    return createPortal(
         <StModalBg>
             <StModalBox>{children}</StModalBox>
-        </StModalBg>
+        </StModalBg>,
+        document.getElementById('portal-root')
     );
 }
 

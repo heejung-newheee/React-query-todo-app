@@ -29,13 +29,17 @@ function Login() {
     const loginHandler = (e) => {
         e.preventDefault();
         const loginUserInfo = data.find((item) => item.uid === id && item.pw === pw);
-        console.log(loginUserInfo);
-        const loginInfo = {
-            ...loginUserInfo,
-            isLogin: true
-        };
-        mutationLogin.mutate(loginInfo);
-        navigate('/');
+        if (loginUserInfo) {
+            console.log(loginUserInfo);
+            const loginInfo = {
+                ...loginUserInfo,
+                isLogin: true
+            };
+            mutationLogin.mutate(loginInfo);
+            navigate('/');
+        } else {
+            alert('아이디 비밀번호를 확인해주세요');
+        }
     };
 
     return (
@@ -49,8 +53,8 @@ function Login() {
                     <form onSubmit={loginHandler}>
                         <StLabel htmlFor="">아이디</StLabel>
                         <StInputForm placeholder="아이디를 입력하세요" name="" type="text" value={id} onChange={onChangeIdHandler} />
-                        {id.length < 2 ? (
-                            <StPtag>5자 이상 입력해주세요</StPtag>
+                        {id.length < 4 ? (
+                            <StPtag>4자 이상 입력해주세요</StPtag>
                         ) : (
                             <StPtag>
                                 <br />
@@ -58,8 +62,8 @@ function Login() {
                         )}
                         <StLabel htmlFor="contents">비밀번호</StLabel>
                         <StInputForm placeholder="비밀번호를 입력하세요" name="" type="password" value={pw} onChange={onChangePwHandler} />
-                        {pw.length < 2 ? (
-                            <StPtag>5자 이상 입력해주세요</StPtag>
+                        {pw.length < 4 ? (
+                            <StPtag>4자 이상 입력해주세요</StPtag>
                         ) : (
                             <StPtag>
                                 <br />
@@ -75,7 +79,7 @@ function Login() {
                                 $fontColor={'black'}>
                                 홈으로가기
                             </StButton>
-                            <StButton disabled={id.length >= 2 && pw.length >= 2 ? false : true} type="submit" $fontColor={'black'}>
+                            <StButton disabled={id.length >= 4 && pw.length >= 4 ? false : true} type="submit" $fontColor={'black'}>
                                 로그인
                             </StButton>
                         </StButtonWrap>
