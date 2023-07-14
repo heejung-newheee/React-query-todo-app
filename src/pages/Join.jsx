@@ -102,7 +102,10 @@ function Join() {
                             <StPtag>비밀번호가 같은지 확인하세요</StPtag>
                         )}
                         <StButtonWrap>
-                            <StButton disabled={uid.length >= 5 && pw.length >= 5 ? false : true} type="submit" $fontColor={'black'}>
+                            <StButton
+                                disabled={(uid.length < 4 || reg_id1.test(uid)) && (pw.length < 4 || reg_pw1.test(pw)) ? false : true}
+                                type="submit"
+                                $fontColor={'black'}>
                                 회원 가입
                             </StButton>
                             <StButton
