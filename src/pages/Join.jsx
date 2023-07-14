@@ -9,8 +9,8 @@ import { StCloseBtn, StModalName, StLabel, StInputForm, StTextArea, StPtag } fro
 import { StButton, StButtonWrap } from 'components/Button';
 import { StTodoBoard } from 'components/Todo/TodoList';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
-import { register } from 'api/users';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { checkUsers, register } from 'api/users';
 import shortid from 'shortid';
 
 function Join() {
@@ -20,6 +20,16 @@ function Join() {
     const [name, onChangeNameHandler] = useInput('');
     const navigate = useNavigate();
 
+    // 유효성 검사 정규식
+    let reg_name5 = /^[가-힣a-zA-Z]+$/; // 한글 + 영문만
+    let reg_id1 = /^[a-z0-9_-]{4,20}$/; // 소문자 + 숫자 + 언더바/하이픈 허용 4~20자리
+    let reg_pw1 = /^[a-z0-9_-]{4,18}$/; // 단순 4~18자리
+
+    const { data } = useQuery('users', checkUsers);
+    const existsId = data?.map((item) => {
+        return item.uid;
+    });
+    console.log(existsId);
     // 쿼리관련
     const queryClient = useQueryClient();
     const mutationJoin = useMutation(register, {
@@ -29,15 +39,19 @@ function Join() {
     });
     const registerHandler = (e) => {
         e.preventDefault();
-        const newUser = {
-            id: shortid.generate(),
-            uid: uid,
-            pw: pw,
-            userName: name,
-            isLogin: false
-        };
-        mutationJoin.mutate(newUser);
-        navigate('/login');
+        if (existsId.includes(uid) === true) {
+            console.log('같아');
+        } else {
+            const newUser = {
+                id: shortid.generate(),
+                uid: uid,
+                pw: pw,
+                userName: name,
+                isLogin: false
+            };
+            mutationJoin.mutate(newUser);
+            navigate('/login');
+        }
     };
 
     return (
@@ -50,9 +64,9 @@ function Join() {
                     </StCloseBtn>
                     <form onSubmit={registerHandler}>
                         <StLabel htmlFor="">이름</StLabel>
-                        <StInputForm placeholder="아이디를 입력하세요" name="" type="text" value={name} onChange={onChangeNameHandler} />
-                        {name.length < 2 ? (
-                            <StPtag>2자 이상 입력해주세요</StPtag>
+                        <StInputForm placeholder="이름을 입력하세요" name="" type="text" value={name} onChange={onChangeNameHandler} />
+                        {name.length < 2 || !reg_name5.test(name) ? (
+                            <StPtag>2자 이상 한글,영문만 입력해주세요</StPtag>
                         ) : (
                             <StPtag>
                                 <br />
@@ -60,8 +74,10 @@ function Join() {
                         )}
                         <StLabel htmlFor="">아이디</StLabel>
                         <StInputForm placeholder="아이디를 입력하세요" name="" type="text" value={uid} onChange={onChangeIdHandler} />
-                        {uid.length < 5 ? (
-                            <StPtag>5자 이상 입력해주세요</StPtag>
+                        {existsId.includes(uid) === true ? (
+                            <StPtag>중복된 아이디입니다</StPtag>
+                        ) : uid.length < 4 || !reg_id1.test(uid) ? (
+                            <StPtag>4-20자 사이 영문,숫자,-_만 입력해주세요</StPtag>
                         ) : (
                             <StPtag>
                                 <br />
@@ -69,8 +85,8 @@ function Join() {
                         )}
                         <StLabel htmlFor="contents">비밀번호</StLabel>
                         <StInputForm placeholder="비밀번호를 입력하세요" name="" type="password" value={pw} onChange={onChangePwHandler} />
-                        {pw.length < 5 ? (
-                            <StPtag>5자 이상 입력해주세요</StPtag>
+                        {pw.length < 4 || !reg_pw1.test(pw) ? (
+                            <StPtag>4자 이상 입력해주세요</StPtag>
                         ) : (
                             <StPtag>
                                 <br />
