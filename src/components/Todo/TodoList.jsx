@@ -16,7 +16,6 @@ function TodoList({ isDone }) {
         <StTodoBoard>
             <StBoardTitleH3>{isDone ? 'To do' : 'Done'}</StBoardTitleH3>
             <StTodoWrap>
-                {/* // data?.(옵셔널 체이닝) 참일경우 실행 아님 undefined 반환하고 끝!*/}
                 {data
                     .filter((todo) => todo.isDone === !isDone)
                     .map((todo) => {
